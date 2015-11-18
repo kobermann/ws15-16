@@ -1,0 +1,106 @@
+\documentclass[12pt, a4wide]{scrreprt}
+
+\usepackage{scrhack}
+\usepackage{scrpage2}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage{ngerman}
+\usepackage{multicol}
+
+\usepackage{titlesec}
+
+%numbers braucht man wohl für IEEEtranN...
+\usepackage[numbers]{natbib}
+
+\begin{document}
+\setkomafont{disposition}{\normalcolor\bfseries}
+%-------Titelseite-------%
+\noindent
+Konstantin Obermann \hfill Mat.nr: 947545\\
+Universität Osnabrück \hfill 23.10.2015\\
+Wintersemester 15/16\\
+\thispagestyle{empty}
+\begin{center}
+\includegraphics[scale=.9]{uos_proper.png}
+\section*{}
+{\LARGE Ausarbeitung zum Thema}\\
+\section*{}
+{\Huge {\bf Lokalisierung in drahtlosen Sensornetzwerken}}\\
+\section*{}
+{\Large Im Rahmen des Seminars ''Verteilte Systeme''}\\
+\section*{}
+{\Large Betreuer:}\\
+{\Large Prof.Dr.rer.nat Nils Aschenbruck}\\
+{\Large Dipl.-Inform. Matthias Schwamborn}\\
+\end{center}
+
+%-------Zusammenfassung-------%
+\pagenumbering{roman}
+\tableofcontents
+\addcontentsline{toc}{chapter}{Einleitung und Motivation}
+
+%-------Einleitung-------%
+\pagenumbering{arabic}
+\chapter{Einleitung und Motivation}
+Der technologische und wirtschaftliche Fortschritt erfordert eine zuverlässige, konsistente und in vielen Fällen eine drahtlose Kommunikation. Die wohl bekanntesten drahtlosen Netzwerke sind die Mobilfunknetzstandards (GSM, UMTS, LTE), das WLAN und die WSN.\\
+\indent 
+Diese Ausarbeitung beschäftigt sich hauptsächlich mit den {\bf W}ireless {\bf S}ensor {\bf N}etworks (WSN). Die Lokalisierung der einzelnen Sensorknoten innerhalb WSNs erfolgt auf Basis von AOA, RSS oder distanzbasierten Ansätzen zur Positionsbestimmung. Eine schnelle Lokalisierung der einzelnen Sensoren erfolgt dann, wenn diese vorher optimal plaziert werden, um die Anzahl an Knoten im WSN zu minimieren und den Overhead in den Lokalisierungsalgorithmen zu vermeiden\cite{anchor_placement}.\\
+\indent
+Faktoren, wie Schnelligkeit und Präzision der Lokalisierung sowie der Grad der Autonomie des WSN, beeinflussen dessen Zuverlässigkeit und Potential. Dieses Potential ist entscheidend für die Auswahl an Einsatzmöglichkeiten eines WSN. Das Erdbeben-Frühwarnsystem (EEW) ist eines der Einsatzmöglichkeiten. Hier ist eine reibungslose und schnelle Kommunikation zwischen den Knoten besonders wichtig, denn ein Fehlalarm ist kostspielig. Allerdings ein im Ernstfall verspäteter Alarm kann Menschenleben kosten. Weitere Beispiele für die Verwendung von Sensornetzen sind Erkennung von Waldbränden, Überwachung von Deichen, Überwachung von Gebäudestatik, um Erdbebenschäden zu erkennen\cite{building_monitoring} oder das ''Precision Farming''. Bei dem letzten Beispiel werden Sensorknoten auf einem Landwirtschaftlich genutzten Feld verteilt, damit sie die Luftfeuchtigkeit, Temperatur, Grundwasserspiegel messen können. Diese Messungen sollen die Produktivität der Ernte steigern.\\
+\indent
+Zusätzlich zu den auftretenden Messfehlern treten natürliche Störfaktoren auf, die ein Problem darstellen und eine wichtige Rolle bei der Entwicklung und Optimierung dieser Lokalisierungstechniken spielen.
+
+\chapter{Wireless Sensor Networks: Die Grundlagen}
+Erstmalig wurde das Konzept des Sensornetzwerks in den 80\textit{er} Jahren für das Militär entwickelt, findet aber heute nach und nach mehr Anwendungsgebiete und, wie oben bereits erwähnt, vor allem im zivilen Einsatz.\\
+\indent
+Die WSNs bestehen aus vielen, nicht besonders leistungsstarken Sensoren, welche als Knoten (engl. nodes) in dem WSN dienen.
+Diese Knoten sollen möglichst ohne externe Stromversorgung auskommen und können deshalb mit Batterien ausgestattet werden. Die Auswahl der Batterien hängt von der Zugänglichkeit der Knoten ab. Bei leicht erreichbaren und wartbaren Knoten eignen sich handelsübliche Batterien, wie z.B. die \textit{Energizer Ultra+}, welche bei 100\%\textit{iger} Auslastung des Knotensystems eine Laufzeit von bis zu 100 Stunden erreichen kann und bis zu 200 Stunden im Betrieb bleiben kann, wenn der Knoten nur zu 25\% der Zeit aktiv ist (also auch mal in Standbymodus geht)\cite{lifetime_study}.\\
+\indent
+Ein WSN mit nicht so schnell erreichbaren Knoten sollte mit leistungsstärkeren Batterien ausgestattet werden, wie zum Beispiel die von Tadiran\footnote{Französischer Hersteller für Lithiumbatterien (ehem. \textit{Sonnenschein Lithium})} hergestellte $LiSOCl_2$, welche in der Theorie eine Lebensdauer von bis zu 40 Jahre erreichen kann.\\
+\indent
+Bei den Knoten im WSN unterscheidet man zwischen \textit{Ankerknoten} bzw. \textit{Anker}, deren absolute Position initial bekannt ist und den \textit{Sensorknoten}, deren Position mithilfe der Anker bestimmt werden soll. 
+Die weitere Ausstattung und somit die Kosten und Komplexität der Sensoren hängt von der Lokalisierungsmethode ab.\\
+\indent
+Einige Anwendungsbereiche erfordern einen zentralen Rechner. In diesem Fall sollte also ein- oder mehrere Knoten als Gateway konfiguriert werden, um klar definierte Schnittstelle(n) zur Zentrale zu bilden.\\
+\indent
+Zwar kann die Position der Knoten mit dem GPS ermittelt werden, allerdings erfordert die Vielseitigkeit der Einsatzmöglichkeiten der WSN eine Unabhängigkeit von der GPS-Positionierung. Das liegt daran, dass das GPS trotz der genauen Ortung ein zu schwaches Funksignal nutzt, welches eine zuverlässige  Ortung innerhalb von Gebäuden oder unter der Erde nicht möglich macht. Deswegen muss ein WSN in der Lage sein, eigenständig ein Netz zu initialisieren, alle Nichtanker-Knoten zu orten und ggf. deren Standortinformationen an einen zentralen Rechner weiterzugeben.
+
+%\chapter{Die richtige Ankerplazierung}
+%Die richtige Plazierung der Anker spielt eine große Rolle bei den meisten %Lokalisierungsmethoden.
+
+\chapter{Ansätze zur Positionsbestimmung}
+Die Hardware der Sensorknoten muss also den Umständen der Anwendungsbereiche angepasst werden. Da die Sensorausstattung ebenso von der Lokalisierungsmethode abhängt, hat die Wahl des passenden Ansatzes den meisten Einfluss auf die Kosten und den Energieverbrauch der Sensoren. Die Ansätze lassen sich in zwei grobe Kategorien einteilen. Die erste Kategorie umfasst die Methoden, welche mit Abstands- oder Winkelmessung arbeiten. In die zweite Kategorie fallen die sogenannten \textit{range-free} Methoden.\\ 
+\indent
+Im Folgenden werden die im Fokus der Forschung liegenden Ansätze zur Positionsbestimmung vorgestellt.
+  \section{Angle Of Arrival Measurement}
+Das Prinzip der {\bf A}ngle {\bf O}f {\bf A}rrival (AOA) Lokalisierung arbeitet mit dem Eintrittswinkel des empfangenen Signals. Dazu sollte der Empfänger einen ungehinderten Sichtkontakt zum Sender haben. Diese Lokalisierungsart kann in zwei Vorgehensweisen aufgeteilt werden, die in den Folgenden zwei Kapiteln beschrieben werden.
+    \subsection{Das Beamforming Prinzip}
+
+    \subsection{Phase Interferometry}
+Bei dem sog. \textit{phase interferometry}\cite{q1} Verfahren handelt es sich um die Bestimmung des eingehenden Signals durch eine Antennenfront. Diese Antennen empfangen das Signal des Senders zu unterschiedlichen Zeitpunkten. Das führt zu einem Unterschied der empfangenen Phase. Mithilfe dieses Phasenunterschiedes lässt sich mathematisch die Richtung des Senders bestimmen.
+  \section{Distance Based Measurement}
+    \subsection{Lighthouse Approach}
+    \subsection{One-Way Propagation}
+    \subsection{Round-Trip Propagation}
+    \subsection{RSS-based Distance Measurement}
+    \subsection{Time Difference Of Arrival}
+
+\chapter{Einsatzmöglichkeiten}
+  \section{Kommerzieller Einsatz}
+  \section{Industrieller Einsatz}
+
+\chapter{Aktuelle Probleme und Fragestellungen}
+  \section{Multipath propagation}
+  \section{Shadowing}
+
+\chapter{Zusammenfassung}
+
+\newpage
+%\bibliographystyle{te}
+\bibliographystyle{IEEEtranN}
+
+\begin{multicols}{2}
+\bibliography{sources}
+\nocite{*}
+\end{multicols}
+\end{document}
