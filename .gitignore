@@ -1,0 +1,7 @@
+#ignore latex aux crap#
+*.aux
+*.bbl
+*.blg
+*.log
+*.gz
+*.toc
