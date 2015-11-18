@@ -69,21 +69,36 @@ Zwar kann die Position der Knoten mit dem GPS ermittelt werden, allerdings erfor
 %Die richtige Plazierung der Anker spielt eine große Rolle bei den meisten %Lokalisierungsmethoden.
 
 \chapter{Ansätze zur Positionsbestimmung}
-Die Hardware der Sensorknoten muss also den Umständen der Anwendungsbereiche angepasst werden. Da die Sensorausstattung ebenso von der Lokalisierungsmethode abhängt, hat die Wahl des passenden Ansatzes den meisten Einfluss auf die Kosten und den Energieverbrauch der Sensoren. Die Ansätze lassen sich in zwei grobe Kategorien einteilen. Die erste Kategorie umfasst die Methoden, welche mit Abstands- oder Winkelmessung arbeiten. In die zweite Kategorie fallen die sogenannten \textit{range-free} Methoden.\\ 
+Die Hardware der Sensorknoten muss also den Umständen der Anwendungsbereiche angepasst werden. Da die Sensorausstattung ebenso von der Lokalisierungsmethode abhängt, hat die Wahl des passenden Ansatzes einen großen Einfluss auf die Kosten und den Energieverbrauch der Sensoren. Die Ansätze lassen sich in zwei grobe Kategorien einteilen.\\
+\indent
+Die erste Kategorie umfasst die \textit{range-based} Methoden, welche mit Abstands- oder Winkelmessung arbeiten. Diese nutzen die im weiteren Verlauf beschriebenen Ansätze wie AOA, TOA, TDoA, RSS und erreichen, auf Kosten von Komplexität, eine höhere Genauigkeit als die zweite Kategorie.\\
+\indent
+In die zweite Kategorie fallen die \textit{range-free} Methoden, also Lokalisierungstechniken, die auf einen direkten Bezug zwischen eines Ankers und eines Sensorknotens verzichten. Hierbei gibt es unterschiedliche Methoden und eine davon ist \textit{area-based}\cite{area_based}. Das Prinzip hierbei ist, dass die Anker mithilfe von unterschiedlich empfangenen Signalstärken untereinander eine Fläche generieren, in welcher sich der Sender befinden soll.\\
+\indent
+Die range-based Methoden eignen sich für WSNs, bei denen eine möglichst exakte Positionsbestimmung wichtig ist. Die range-free Lokalisierung ist eine Alternative, wenn die Ausstattung der Knoten im WSN möglichst kosteneffizient sein soll und die Kenntnis über die exakte Position der Sender nicht zwingend erforderlich ist.\\ 
 \indent
 Im Folgenden werden die im Fokus der Forschung liegenden Ansätze zur Positionsbestimmung vorgestellt.
-  \section{Angle Of Arrival Measurement}
+  \section{Angle Of Arrival Ansätze}
 Das Prinzip der {\bf A}ngle {\bf O}f {\bf A}rrival (AOA) Lokalisierung arbeitet mit dem Eintrittswinkel des empfangenen Signals. Dazu sollte der Empfänger einen ungehinderten Sichtkontakt zum Sender haben. Diese Lokalisierungsart kann in zwei Vorgehensweisen aufgeteilt werden, die in den Folgenden zwei Kapiteln beschrieben werden.
     \subsection{Das Beamforming Prinzip}
 
+\newpage
     \subsection{Phase Interferometry}
-Bei dem sog. \textit{phase interferometry}\cite{q1} Verfahren handelt es sich um die Bestimmung des eingehenden Signals durch eine Antennenfront. Diese Antennen empfangen das Signal des Senders zu unterschiedlichen Zeitpunkten. Das führt zu einem Unterschied der empfangenen Phase. Mithilfe dieses Phasenunterschiedes lässt sich mathematisch die Richtung des Senders bestimmen.
-  \section{Distance Based Measurement}
+Bei dem sog. \textit{phase interferometry}\cite{q1} Verfahren handelt es sich um die Bestimmung des eingehenden Signals durch eine Antennenfront. In {\bf Abb.3.1} ist der Aufbau skizziert. Hierbei sind $x1...xn$ die Antennen, welche mit dem gleichen Abstand $d$, welcher vorher bekannt ist, zueinander aufgebaut sind. Diese Antennen empfangen das Signal des Senders zu unterschiedlichen Zeitpunkten. Während die letzte Welle in diesem Beispiel gerade noch $x1$ verlässt, so tritt sie gleichzeitig bei $x2$ ein. Das ist der zeitliche Unterschied der empfangenen Phase, also die \textit{Phasenverschiebung}. Mithilfe dieses Phasenunterschiedes lässt sich mathematisch die Richtung des Senders bestimmen.\\
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[scale=.3]{phase_int2.png}
+\caption{Ankommende Wellenfronten an den Antennen}
+
+\end{figure}
+
+  \section{Distanzbasierte Ansätze}
     \subsection{Lighthouse Approach}
-    \subsection{One-Way Propagation}
+    \subsection{One-Way Propagation/TOA}
+    \subsection{Time Difference Of Arrival/TDOA}
     \subsection{Round-Trip Propagation}
-    \subsection{RSS-based Distance Measurement}
-    \subsection{Time Difference Of Arrival}
+    \subsection{RSS-based Distance Measurement}    
 
 \chapter{Einsatzmöglichkeiten}
   \section{Kommerzieller Einsatz}
