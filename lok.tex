@@ -80,9 +80,9 @@ Die range-based Methoden eignen sich für WSNs, bei denen eine möglichst exakte
 Im Folgenden werden die im Fokus der Forschung liegenden Ansätze zur Positionsbestimmung vorgestellt.
   \section{Angle Of Arrival Ansätze}
 Das Prinzip der {\bf A}ngle {\bf O}f {\bf A}rrival (AOA) Lokalisierung arbeitet mit dem Eintrittswinkel des empfangenen Signals. Dazu sollte der Empfänger einen ungehinderten Sichtkontakt zum Sender haben. Diese Lokalisierungsart kann in zwei Vorgehensweisen aufgeteilt werden, die in den Folgenden zwei Kapiteln beschrieben werden.
+\newpage    
     \subsection{Das Beamforming Prinzip}
-
-\newpage
+Beim Beamforming wird mithilfe einer Richtanenne ein ankommendes Signal normiert, indem der Empfangskegel der Richtanenne mechanisch oder elektronisch gedreht wird, bis das empfangene Signal die höchste Sendeleistung erreicht. Somit kann die Richtung des Senders bestimmt werden. Eine variierende Signalstärke ist ein Störfaktor bei dieser Methodik. Ein Ansatz, welcher in \cite{q1} besprochen wird, befasst sich mit mehreren rotierbaren Richtantennen, deren gesammelten Informationen durch eine Zentrale Einheit überlappt berechnet werden und somit eine höhere Genauigkeit erreicht werden. Laut \cite{q1} können mit 4 Richtantennen eine Richtungsgenauigkeit von $10^\circ -15^\circ$, mit 6 Antennen $5^\circ$ und mit bereits 8 Antennen eine Genauigkeit von $2^\circ$ erreicht werden.
     \subsection{Phase Interferometry}
 Bei dem sog. \textit{phase interferometry}\cite{q1} Verfahren handelt es sich um die Bestimmung des eingehenden Signals durch eine Antennenfront. In {\bf Abb.3.1} ist der Aufbau skizziert. Hierbei sind $x1...xn$ die Antennen, welche mit dem gleichen Abstand $d$, welcher vorher bekannt ist, zueinander aufgebaut sind. Diese Antennen empfangen das Signal des Senders zu unterschiedlichen Zeitpunkten. Während die letzte Welle in diesem Beispiel gerade noch $x1$ verlässt, so tritt sie gleichzeitig bei $x2$ ein. Das ist der zeitliche Unterschied der empfangenen Phase, also die \textit{Phasenverschiebung}. Mithilfe dieses Phasenunterschiedes lässt sich mathematisch die Richtung des Senders bestimmen.\\
 
@@ -92,14 +92,15 @@ Bei dem sog. \textit{phase interferometry}\cite{q1} Verfahren handelt es sich um
 \caption{Ankommende Wellenfronten an den Antennen}
 
 \end{figure}
-
+\newpage
   \section{Distanzbasierte Ansätze}
+Bei den distanzbasierten Ansätzen werden zur Positionserkennung des Senders Informationen genutzt, welche fest mit dem Abstand zur Signalquelle korrelieren. Die Übertragungszeit eines Signals vom Sender zum Empfänger ist eine Information, welche genutzt werden kann, sowie die Übertragungs- und Rückkehrzeit (auch \textit{ping} genannt).
     \subsection{Lighthouse Approach}
     \subsection{One-Way Propagation/TOA}
     \subsection{Time Difference Of Arrival/TDOA}
-    \subsection{Round-Trip Propagation}
-    \subsection{RSS-based Distance Measurement}    
-
+    \subsection{Round-Trip Propagation/ping}
+    \subsection{RSS-basierte Lokalisierung}    
+  \section{Flächenbasierte Lokalisierung}
 \chapter{Einsatzmöglichkeiten}
   \section{Kommerzieller Einsatz}
   \section{Industrieller Einsatz}
