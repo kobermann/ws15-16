@@ -1,5 +1,4 @@
 \documentclass[12pt, a4wide]{scrreprt}
-
 \usepackage{scrhack}
 \usepackage{scrpage2}
 \usepackage{graphicx}
@@ -10,8 +9,14 @@
 
 \usepackage{titlesec}
 
-%numbers braucht man wohl für IEEEtranN...
+%numbers braucht man wohl für IEEEtranN
 \usepackage[numbers]{natbib}
+
+%irgendein hack für die Seitennummerierug-----v
+\usepackage{tikzpagenodes}
+\usetikzlibrary{calc}
+\usepackage[contents={}]{background}
+
 
 \begin{document}
 \setkomafont{disposition}{\normalcolor\bfseries}
@@ -37,7 +42,7 @@ Wintersemester 15/16\\
 
 
 \newpage
-\pagestyle{empty}
+\thispagestyle{empty}
 \section*{Abkürzungsverzeichnis}
  \begin{acronym}
 \acro{WSN}{Wireless Sensor Network}
@@ -49,6 +54,25 @@ Wintersemester 15/16\\
 \end{acronym}
 
 \newpage
+\newcommand{\myfooterstyle}[2][]{%
+\tikz[remember picture,overlay]{%
+   \draw[#1]
+   ($(current page footer area.south west)!0.25!(current page footer area.north west)$)
+   --
+   ($(current page footer area.south)!0.25!(current page footer area.north)-(#2,0)$)
+   ($(current page footer area.south)!0.25!(current page footer area.north)+(#2,0)$)
+   --
+   ($(current page footer area.south east)!0.25!(current page footer area.north east)$)
+   ;
+  }%
+}
+
+\AddEverypageHook{%
+\myfooterstyle{1em}
+\BgMaterial}
+%--------------------------------------------^
+
+%-----------Inhaltsverzeichnis--------------%
 \tableofcontents
 \pagenumbering{roman}
 
@@ -148,7 +172,6 @@ Die flächenbasierte Lokalisierung ist eine Spezialform der \textit{range-free} 
 
 \newpage
 \bibliographystyle{IEEEtranN}
-\pagestyle{empty}
 \bibliography{sources}
 \nocite{*}
 \end{document}
