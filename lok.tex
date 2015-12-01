@@ -35,12 +35,6 @@ Wintersemester 15/16\\
 {\Large Dipl.-Inform. Matthias Schwamborn}\\
 \end{center}
 
-\newpage
-\chapter*{Fragen}
-\thispagestyle{empty}
--Abkürz.verz. anlegen und nur mit Abkürzungen arbeiten?\\
--S.2 zentraler Rechner, falsche Info?\\
--Für erste Quelle gibt es keine Seitenangabe\\
 
 \newpage
 \pagestyle{empty}
@@ -136,7 +130,7 @@ Als Alternative ist es möglich, zwei Laser am Sender so anzubringen, dass sie e
     \subsection{One-Way Propagation/Time of Arrival}
 \textit{One-Way Propagation} steht für die Übertragung eines Signals in eine Richtung. Im Gegensatz zum \textit{Round-Trip} wird das Messsignal nicht zurück gesendet. Um die Zeit zwischen dem Senden und Empfangen zu messen, muss der Empfänger die Uhrzeit des Sendens wissen. Dafür müssen die Uhren vom Sender und Empfänger möglichst synchron laufen, dies erfordert aber eine weitere, komplexe Kommunikation zwischen den Geräten. Unter dem Kosten- und Ressourcenaspekt ist dies schwierig umzusetzen.
 	\subsection{Round-Trip Propagation/ping}
-Die erweiterte Alternative zu der letzten Methode ist das \textit{ping} Prinzip. Hierbei wird das Signal nicht vom Empfänger gemessen. Stattdessen sendet der Empfänger das Signal wieder zurück und der ursprüngliche Sender vergleicht die Sende- und Rückkehrzeit des Signalpakets. Anhand dieser Zeitdifferenz lässt sich dann die Distanz berechnen. Hierbei wird keine Synchronisierung der Sender- und Empfängeruhren benötigt. Der Emfpänger braucht allerdings eine bestimmte Zeit, um das Signal zu empfangen, verarbeiten und wieder zurückzuschicken. Diese Zeit kann der Empfänger selbst ausrechnen und zurückschicken, damit die Berechnungen um diesen Wert korrigiert werden können.\\
+Die erweiterte Alternative zu One-Way Propagation ist das \textit{ping} Prinzip. Hierbei wird das Signal nicht vom Empfänger gemessen. Stattdessen sendet der Empfänger das Signal wieder zurück und der ursprüngliche Sender vergleicht die Sende- und Rückkehrzeit des Signalpakets. Anhand dieser Zeitdifferenz lässt sich dann die Distanz berechnen. Hierbei wird keine Synchronisierung der Sender- und Empfängeruhren benötigt. Der Empfänger braucht allerdings eine bestimmte Zeit, um das Signal zu empfangen, verarbeiten und wieder zurückzuschicken. Diese Zeit kann der Empfänger selbst ausrechnen und zurückschicken, damit die Berechnungen um diesen Wert korrigiert werden können.\\
     \subsection{Time Difference Of Arrival}
     \subsection{RSS-basierte Lokalisierung}    
   \section{Flächenbasierte Lokalisierung}
@@ -145,7 +139,7 @@ Die flächenbasierte Lokalisierung ist eine Spezialform der \textit{range-free} 
   \section{Kommerzieller Einsatz}
   \section{Industrieller Einsatz}
 
-\chapter{Aktuelle Probleme und Fragestellungen?}
+\chapter{Aktuelle Probleme und Fragestellungen}
   \section{Multipath propagation}
 \textit{Multipath propagation}(Mehrwegempfang) ist eines der Störfaktoren in der drahtlosen Übertragung. Dieser Faktor beeinflusst alle Messmethoden, die sich auf eine konstante Signalstärke eines oder mehrerer Empfänger verlassen müssen. Mehrwegempfang tritt auf, wenn Signal von Oberflächen reflektiert wird und somit ein gespiegeltes, schwächeres Signal entsteht. Dieses Phantomsignal kann Messergebnisse beeinflussen, weil es als eine zusätzliche Quelle wahrgenommen werden kann.
   \section{Shadowing}
