@@ -6,9 +6,7 @@
 \usepackage{ngerman}
 \usepackage{multicol}
 \usepackage[printonlyused,withpage]{acronym}
-
 \usepackage{titlesec}
-
 %numbers braucht man wohl für IEEEtranN
 \usepackage[numbers]{natbib}
 
@@ -16,7 +14,7 @@
 \usepackage{tikzpagenodes}
 \usetikzlibrary{calc}
 \usepackage[contents={}]{background}
-
+%--------------------------------------------^
 
 \begin{document}
 \setkomafont{disposition}{\normalcolor\bfseries}
@@ -53,26 +51,6 @@ Wintersemester 15/16\\
 \acro{COTS}{Commercial Off-The-Shelf}
 \end{acronym}
 
-\newpage
-%\newcommand{\myfooterstyle}[2][]{%
-%\tikz[remember picture,overlay]{%
-%   \draw[#1]
-%   ($(current page footer area.south west)!0.25!(current page %footer area.north west)$)
-%   --
-%   ($(current page footer area.south)!0.25!(current page footer %area.north)-(#2,0)$)
-%   ($(current page footer area.south)!0.25!(current page footer %area.north)+(#2,0)$)
-%   --
-%   ($(current page footer area.south east)!0.25!(current page %footer area.north east)$)
-%   ;
-%  }%
-%}
-
-%\AddEverypageHook{%
-%\myfooterstyle{1em}
-%\BgMaterial}
-
-%--------------------------------------------^
-
 %-----------Inhaltsverzeichnis--------------%
 \tableofcontents
 \pagenumbering{roman}
@@ -80,6 +58,11 @@ Wintersemester 15/16\\
 \automark{chapter}
 %-------Einleitung-------%
 \chapter{Einleitung und Motivation}
+%keine newpage bei neuem chapter
+\renewcommand{\cleardoublepage}{}
+\renewcommand{\clearpage}{}
+
+
 \clearscrheadfoot
 \pagestyle{scrheadings}
 \ihead{\textnormal{Seite \thepage}}
@@ -92,13 +75,13 @@ Der technologische und wirtschaftliche Fortschritt erfordert eine zuverlässige,
 
 Das \ac{WSN} dagegen ist ein Netz aus Sensoren. Die besondere Eigenschaft dieser Sensoren ist, dass sie sehr klein sind, auf kurze Distanzen miteinander kommunizieren, sowie Daten verarbeiten können und sparsam im Energieverbrauch sind. Sie können mithilfe ihrer Sensoren Informationen aus der Umwelt entnehmen und verarbeiten und besonders die Fähigkeit, ein Ad-hoc-Netz aufzuspannen, macht die \acs{WSN} zu einem vielfältig einsetzbaren drahtlosen Netzwerk.
 
-Faktoren, wie Schnelligkeit und Präzision der Lokalisierung sowie der Grad der Autonomie des WSN, beeinflussen dessen Zuverlässigkeit und Potential. Dieses Potential ist entscheidend für die Auswahl der Einsatzmöglichkeiten. Das Erdbeben-Frühwarnsystem (EEW) ist eine der Anwendungsmöglichkeiten der \ac{WSN}. Hier ist eine reibungslose und schnelle Kommunikation zwischen den Knoten besonders wichtig, denn ein Fehlalarm ist kostspielig. Allerdings ein im Ernstfall verspäteter Alarm kann Menschenleben kosten. Weitere Beispiele für die Verwendung von Sensornetzen sind Erkennung von Waldbränden, Überwachung von Deichen, Überwachung von Gebäudestatik, um Erdbebenschäden zu erkennen\cite{building_monitoring} oder das ''Precision Farming''.
+Faktoren, wie Schnelligkeit und Präzision der Lokalisierung sowie der Grad der Autonomie des WSN, beeinflussen dessen Zuverlässigkeit und Potential. Dieses Potential ist entscheidend für die Auswahl der Einsatzmöglichkeiten. Das Erdbeben-Frühwarnsystem (EEW) ist eine der Anwendungsmöglichkeiten der \ac{WSN}. Hier ist eine reibungslose und schnelle Kommunikation zwischen den Knoten besonders wichtig, damit ein Ernstfall rechtzeitig erkannt werden kann. Weitere Beispiele für die Verwendung von Sensornetzen sind Erkennung von Waldbränden, Überwachung von Deichen, Überwachung von Gebäudestatik, um Erdbebenschäden zu erkennen\cite{building_monitoring} oder das ''Precision Farming''. Der Einsatz in Lagerhäusern bietet sich ebenfalls an, um ein- und auskommende Waren zu verwalten.
 
-Diese Ausarbeitung beschäftigt sich mit Lokalisierungstechniken in \acs{WSN}. Zunächst in Kapitel 2 werden die Grundlagen der \acs{WSN} eingeführt und in Kapitel 3 sind Ansätze zur Lokalisierung in diesen Netzwerken vorgestellt und in Kap.4,5 näher erläutert. Im 6.Kapitel sind Beispiele für Anwendungsgebiete der \acs{WSN} vorgestellt und anschließend werden in Kapitel 7 Probleme behandelt, die bei der Lokalisierung auftreten können.
-
+Diese Ausarbeitung beschäftigt sich mit Lokalisierungstechniken in \acs{WSN}. Zunächst werden in Kapitel 2 die Grundlagen der \acs{WSN} eingeführt, in Kapitel 3 Ansätze und zur Lokalisierung in diesen Netzwerken vorgestellt und in Kap.4 näher erläutert. Im 5.Kapitel werden Probleme behandelt, die bei der Lokalisierung auftreten können. Anschließend werden in Kap. 6 Beispiele für Anwendungsgebiete der \acs{WSN} vorgestellt.
 
 \chapter{Wireless Sensor Network: Die Grundlagen}
-Ein WSN besteht aus kleinen, vergleichsmäßig leistungsschwachen Sensoren, welche als Knoten (engl. nodes) im WSN dienen. Ein Beispiel für einen Knoten in einem WSN ist das \textit{WiSe Mote} mit einer Größe von 56x58mm, ausgestattet mit einem \textit{ZigBee 2420} drahtlosen Kommunikationsmoduls und in den Mikrocontroller eingebauten 4kB RAM\cite{WiSe}. Die Lebensdauer der Knoten reicht i.d.R. von 100-200 Stunden\cite{lifetime_study} bis zu 40 Jahren\cite{lisocl}.
+Ein WSN besteht aus kleinen, vergleichsmäßig leistungsschwachen Sensoren, welche als Knoten (engl. nodes) im WSN dienen. Die Größe der Sensoren variiert je nach Ausstattung und Leistungsbedarf, überschreitet jedoch in der Regel nicht die Größe eines Schuhkartons. Die Kommunikation erfolgt auf dem Netzwerkprotokoll IEEE 802.15.4\footnote{Wireless Personal Area Networks Protokoll} oder auf dem \textit{ZigBee}, einer Erweiterung dieses Protokolls\cite{patwari_locating}.
+Die Lebensdauer der Knoten reicht i.d.R. von 100-200 Stunden\cite{lifetime_study} bis zu 40 Jahren\cite{lisocl}.
 
 Die eingeschränkte Leistung der Sensoren stellt eine Herausforderung beim Design des WSN dar. Um eine lange Betriebsdauer der Sensoren zu gewährleisten, ist eine exakt angepasste Hardware zu wählen, da zusätzliche Sensorik ebenso zusätzliche Auslastung und Energieverbrauch bedeutet, wobei Größe der Sensorknoten und somit ihre Arbeitsressourcen(RAM, CPU) nicht viel Spielraum für Rechenauslastung lassen.
 
@@ -113,8 +96,7 @@ Grundsätzlich unterscheidet man bei den Sensoren im WSN zwischen \textit{Anker}
 
 Diese Lokalisierungsansätze lassen sich in zwei grobe Kategorien einteilen\cite{area_based}: Die erste Kategorie umfasst die \textit{range-based} Methoden, welche mit Abstands- oder Winkelmessung arbeiten. Diese nutzen die im weiteren Verlauf beschriebenen Ansätze wie \ac{AOA}, \ac{RSS}, \ac{TOA} und \ac{TDOA}.
 
-Die zweite Kategorie sind die \textit{range-free} Methoden, also Lokalisierungstechniken, die auf einen direkten Bezug zwischen den Sensorknoten verzichten und daher nicht so präzise sind, wie die range-based Ansätze. 
-%Eine der range-free Methoden ist die \textit{area-based}\cite{area_based} Lokalisierungstechnik. Das Prinzip hierbei ist, dass die Anker mithilfe von unterschiedlich empfangenen Signalstärken untereinander eine Fläche generieren, in welcher die Position des Senders geschätzt werden soll.
+Die zweite Kategorie sind die \textit{range-free} Methoden, also Lokalisierungstechniken, die auf einen direkten Bezug zwischen den Sensorknoten verzichten, sondern nur Verbindungsinformationen nutzen. Diese sind zwar kostengünstiger und erfordern weniger komplexe Sensorik, sie sind aber nicht so präzise, wie die range-based Ansätze und werden in dieser Ausarbeitung nicht ausführlich behandelt. Eine der range-free Methoden ist die \textit{area-based}\cite{area_based} Lokalisierungstechnik. Das Prinzip hierbei ist, dass die Anker mithilfe von unterschiedlich empfangenen Signalstärken untereinander eine Fläche generieren, in welcher die Position des Senders geschätzt werden soll.
 
 Die range-based Methoden eignen sich für WSNs, bei denen eine möglichst exakte Positionsbestimmung wichtig ist, wobei die Komplexität und somit die Kosten der Sensoren aufgrund des Bedarfes an Sensorik steigen. Range-free Lokalisierung ist eine Alternative, wenn die Ausstattung der Knoten im WSN möglichst kosteneffizient sein soll und die Kenntnis über die exakte Position der Sender nicht zwingend erforderlich ist.
 
@@ -149,7 +131,7 @@ Als Alternative ist es möglich, zwei Laser am Sender so anzubringen, dass sie e
 \begin{figure}[!htb]
 \centering
 \includegraphics[scale=.07]{toa.png}
-\caption{Zweidimensionale Lokalisierung mithilfe von TOA vgl.\cite{toa}}
+\caption{Zweidimensionale Lokalisierung mithilfe von TOA, Quelle:\cite{toa}}
 \end{figure}
 
 Man benötigt also mindestens 3 Anker, um die Position des Senders zu ermitteln. Der weitere wichtige Punkt ist die Synchronisierung der Geräte bezüglich der Uhren.
@@ -180,27 +162,51 @@ Mithilfe des \textit{phase interferometry}\cite{q1} Verfahrens lässt sich die R
 \caption{Ankommende Wellenfronten an den Antennen}
 \end{figure}
 
+\section{Vergleich der Ansätze}
+Jeder dieser Ansätze stellt eine gute Entfernungs- und Positionsschätzung dar. Die Präzision variiert jedoch und hängt zudem von Anzahl der Knoten und der Größe des Einsatzgebietes ab. In {\bf Abb. 4.4} ist der in \cite{patwari_locating} vorgestellte Vergleich der Lokalisierungseffizienz unter der Nutzung der erwähnten Ansätze. Man kann erkennen, dass die Fehleranfälligkeit, dargestellt in Metern, mit steigender Knotenanzahl sinkt. Das $r$ steht für den Messradius der Anker. $r = 10m$ bedeutet also, dass die Ankerknoten Messungen nur innerhalb eines Radiuses von $10m$ durchführen und $r = \infty$ bedeutet, dass alle Sensordaten erfasst werden.
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[scale=.6]{accuracy_patwari.png}
+\caption{Präzision der Lokalisierung verschiedener Ansätze, Quelle:\cite{patwari_locating}}
+\end{figure}
+
+Unter explizit diesen Voraussetzungen\cite{patwari_locating} ist die AOA Methode präziser in der Lokalisierung anderer Knoten, als die anderen Methoden. Die Effizienz des RSS Ansatzes wächst jedoch mit steigenden Ankern schneller, als die der TOA Methode, obwohl diese mit einer geringen Anzahl an Ankern effizienter ist, als RSS.
+
+Der Einsatz in unterschiedlichen Gebieten und unter anderen Voraussetzungen wird dieses Ergebnis sehr wahrscheinlich verändern, denn die Lokalisierungstechniken unterliegen mit unterschiedlicher Härte den Problemen, wie Mehrwegempfang oder Schwund des Signals. 
+
 %\chapter{Range-free Methoden}
 %http://delivery.acm.org/10.1145/940000/938995/p81-he.pdf?ip=131.173.191.68&id=938995&acc=ACTIVE%20SERVICE&key=2BA2C432AB83DA15%2E2BB856C4FB99BD06%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35&CFID=735257829&CFTOKEN=37434624&__acm__=1449160971_7742a273b04a36ba04a573683866b02a
 %    \section{Flächenbasierte Lokalisierung}
 %Die flächenbasierte Lokalisierung ist eine Spezialform der \textit{range-free} Lokalisierungsansätze.
+\chapter{Probleme und Fragestellungen}
+  \section{Auftretende Messfehler}
+\textit{Multipath propagation}(Mehrwegempfang) ist eines der Störfaktoren in der drahtlosen Übertragung. Die Eigenschaft der Funkwellen ist, dass diese sich nicht in eine Richtung, sondern konzentrisch in alle Richtungen ausbreiten. Diese Wellen werden an fast allen Oberflächen (Gebäude, Hügel, Wasser) reflektiert. In der {\bf Abb 6.1} ist das von A emittierte Signal abgebildet, welches bei B unter unterschiedlichen Winkeln, und auch zu unterschiedlichen Zeiten, eintrifft. Dies kann dafür sorgen, dass das Signal durch die Interferenz der Signale, die phasenverschoben sind, stark geschwächt wird. Außerdem können diese reflektierten Signale nicht ohne Weiteres dem Ursprungssignal zugeordnet werden, was in der Regel zu einer fälschlicherweise interpretierter neuer, oder mehreren, Signalquelle(n) führen kann.
 
-\chapter{Einsatzmöglichkeiten}
-In der Einleitung wurden Beispiele für die Anwendungsbereiche der \acs{WSN} erwähnt. Bei dem ''precision farming'' werden Sensorknoten auf einem landwirtschaftlich genutzten Feld verteilt, damit sie die Luftfeuchtigkeit, Temperatur und Grundwasserspiegel oder die Beschaffenheit des Bodens messen können. Diese Information sollen ausgewertet und die Produktivität der Ernte steigern. Zusätzlich können WSN in Gewächshäusern\cite{horticulture} platziert und für die Überwachung von Obst-/Gemüsewachstum genutzt werden. In dieser Anwendung wird beispielsweise keine exakte, auf den Millimeter genaue Ortung der Sensoren benötigt. Es kann also auf teure Hardware verzichtet werden.
+\begin{figure}[!htb]
+\centering
+\includegraphics[scale=1]{multipath.png}
+\caption{Reflektion des Radiosignals, Quelle:\cite{multipath}}
+\end{figure}
 
-Eine weitere Möglichkeit, WSNs sinnvoll einzusetzen, ist die Überwachung von Bauwerken. Diese können einsturzgefährdete historische Gebäude sein\cite{historical_monitoring} oder große ausgelastete Brücken wie die Golden Gate Bridge\cite{bridge_monitoring}, deren strukturelle Reaktionen auf Vibrationen festgestellt und darauf basierend Tendenzen der Schwachstellen erstellt werden. Es können auch Analysen von Erdbebenschäden mithilfe von angebrachten Sensoren durchgeführt werden.
-\chapter{Probleme und Lösungsansätze}
-  \section{Auftretende Messfehler}  
-    \subsection{Multipath propagation}
-TOA, TDOA
-
-\textit{Multipath propagation}(Mehrwegempfang) ist eines der Störfaktoren in der drahtlosen Übertragung. Dieser Faktor beeinflusst die Messungen, indem das Signal von Oberflächen reflektiert wird und somit ein gespiegeltes, schwächeres Signal entsteht. Dieses Phantomsignal kann als eine zusätzliche Quelle wahrgenommen werden kann.
-    \subsection{Shadowing}
   \section{Algorithmen zur Behebung von Messfehlern}
-    \subsection{Most-Likelihood}
-    \subsection{Least-Square}
+Die Effekte des multipath und des shadowing lassen sich mit dem Einsatz richtiger Algorithmen und Vorgehen korrigieren. Zum Beispiel kann der längere Einsatz der RSS Messung und die anschließende Mittelwertbildung der Signalstärke die Ungenauigkeiten eliminieren\cite{gezici2008survey}. Eine weitere Möglichkeit ist der Einsatz von sog. \textit{maximum-likelihood} Algorithmen\cite{q1}. Diese erfordern komplexe Berechnungen, können jedoch alle (inklusive reflektierter) Signale erfassen und die tatsächliche Quelle approximieren.
+
+Bei den distanzbasierten Ansätzen gibt es die Möglichkeit, das kommerziell erwerbliche Ultrabreitband (UWB) zu nutzen\cite{q1}, dessen hohe Bandbreite von mehr als $500MHz$ es ermöglicht, kurze Impulse zu senden, die nicht so anfällig für Mehrwegempfang sind.
+
+TODO
+
+\section{Offene Fragen}
+Neben den Messproblemen stellt das Design des WSN eine offene Problematik dar. Neben der Kosten- und Energieverbrauchsminimierung stellt die Auswahl des Netzwerkprotokolls eine weitere Herausforderung dar. Die am weitesten verbreitete Standards für die WSN sind IEEE 802.15. und das erweiterte ZigBee\cite{patwari_locating}. Ein weiterer offener Punkt in der Forschung ist die Entwicklung einer modularen und wartbaren Dienstschicht der WSNs\cite{issues_wsn}, die u.a. den Energieverbrauch durch Optimierung der Hardwarekommunikation senkt.
+\chapter{Einsatzmöglichkeiten}
+Die Einsatzmöglichkeiten der WSN umfassen viele Bereiche. Eines davon ist das in \cite{zebranet} vorgestellte \textit{ZebraNet}, dessen Zweck es ist, das Verhalten von Wildtieren zu beobachten. Da in einem nicht besiedelten Gebiet in der Regel keine Funkzellen vorhanden sind und eine GPS Lokalisierung zu teuer und zu energieverbrauchend ist, eignet sich hierfür ein WSN sehr gut. Die Tiere werden mit Halsbändern ausgestattet, in denen jeweils ein WSN Knoten mit eigener CPU und einem Very High Frequency(VHF) Sender/Empfänger verbaut ist. Diese Knoten sollen untereinander kommunizieren und die Informationen über die Bewegungen sammeln. ZebraNet wurde so entwickelt, dass keine gebundene Basisstation nötig ist, sodass die Anwender mithilfe von mehreren mit Sensoren ausgestatteten Fahrzeugen mobile Anker bilden und mithilfe von Triangulation die Sensoren der Tiere auslesen können. Aufgrund des Verzichtes auf das GPS kann eine Lebensdauer von bis zu einem Jahr erwartet werden. 
+
+In der Einleitung wurde das ''precision farming'' erwähnt. Hierbei werden Sensorknoten auf einem landwirtschaftlich genutzten Feld verteilt, damit sie die Luftfeuchtigkeit, Temperatur und Grundwasserspiegel oder die Beschaffenheit des Bodens messen können. Diese Information sollen ausgewertet und die Produktivität der Ernte steigern. Zusätzlich können WSN in Gewächshäusern\cite{horticulture} platziert und für die Überwachung von Obst-/ Gemüsewachstum genutzt werden. In dieser Anwendung wird keine exakte Ortung der Sensoren benötigt. Es kann also auf teure Hardware verzichtet werden.
+
+Eine weitere Möglichkeit, WSNs sinnvoll einzusetzen, ist die Überwachung von Bauwerken. Diese können einsturzgefährdete historische Gebäude sein\cite{historical_monitoring} oder große ausgelastete Brücken wie die Golden Gate Bridge\cite{bridge_monitoring}, deren strukturelle Reaktionen auf Vibrationen festgestellt und darauf basierend Tendenzen der Schwachstellen erstellt werden. Es können auch Analysen von Erdbebenschäden mithilfe von angebrachten Sensoren durchgeführt werden. Beim Anbringen der Sensoren an Gebäuden ist zu beachten, dass nicht alle Sensoren eine direkte Sichtlinie zu anderen Knoten im WSN haben können. Hierfür eignen sich die AOA Ansätze nicht besonders gut, da diese sich die Berechnungen auf die Sichtlinie zwischen Sensoren verlassen.
+
 \chapter{Zusammenfassung}
-https://www.quora.com/What-are-the-current-hot-research-questions-in-wireless-sensor-networks-WSN
+Diese Ausarbeitung stellte in den ersten beiden Kapiteln die Wireless Sensor Networks und deren Besonderheiten vor und welche Herausforderungen sich in der Praxis ergeben. Hauptsächlich beschäftigte sich die Ausarbeitung mit den grundlegenden range-based Lokalisierungsmethoden AOA, TOA, TDOA, RSS und wie sie in den WSNs eingesetzt werden können.
 \newpage
 \bibliographystyle{IEEEtranN}
 \bibliography{sources}
